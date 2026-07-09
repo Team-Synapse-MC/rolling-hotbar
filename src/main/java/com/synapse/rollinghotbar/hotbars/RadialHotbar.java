@@ -91,10 +91,10 @@ public class RadialHotbar {
 
             // make the selected item a little bigger
             if (slot == selected) {
-                scale = 1.1f;
+                scale = 1.3f;
             }
 
-            float yOffset = distance * distance * 2.5f;
+            float yOffset = distance * distance * 1.55f;
             float alpha = Math.max(0.35f, 1.0f - distance * 0.18f);
 
             float x = centerX + offset * spacing;

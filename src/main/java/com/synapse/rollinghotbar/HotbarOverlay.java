@@ -1,6 +1,8 @@
 package com.synapse.rollinghotbar;
 
 import com.synapse.rollinghotbar.hotbars.RadialHotbar;
+import com.synapse.rollinghotbar.hotbars.RollingHotbar;
+import com.synapse.rollinghotbar.hotbars.SmoothDefaultHotbar;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 

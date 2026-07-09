@@ -1,6 +1,5 @@
-package com.synapse.rollinghotbar.mixins;
+package com.synapse.rollinghotbar;
 
-import com.synapse.rollinghotbar.RollingHotbar;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
