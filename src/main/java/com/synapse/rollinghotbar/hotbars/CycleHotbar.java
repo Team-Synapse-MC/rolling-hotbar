@@ -58,6 +58,23 @@ public class CycleHotbar {
         int centerY = height - 32;
         int spacing = 30;
 
+        // render offhand item
+        ItemStack offhand = mc.player.getOffhandItem();
+
+        if (!offhand.isEmpty()) {
+            graphics.pose().pushPose();
+            // normal selected slot position
+            graphics.pose().translate(centerX, centerY - 20, 0);
+            // smaller than main items
+            graphics.pose().scale(0.75f, 0.75f, 1);
+            RenderSystem.enableBlend();
+            graphics.setColor(1f, 1f, 1f, 0.8f);
+            graphics.renderItem(offhand, -8, -8);
+            graphics.renderItemDecorations(mc.font, offhand, -8, -8);
+            graphics.setColor(1f, 1f, 1f, 1f);
+            graphics.pose().popPose();
+        }
+
         for (int slot = 8; slot >= 0; slot--) {
 
             float offset = slot - displayedSelection;
@@ -85,7 +102,7 @@ public class CycleHotbar {
 
             graphics.pose().pushPose();
 
-            graphics.pose().translate(x, y, 0);
+            graphics.pose().translate(x, y, 200);
             graphics.pose().scale(scale, scale, 1);
 
             RenderSystem.enableBlend();
