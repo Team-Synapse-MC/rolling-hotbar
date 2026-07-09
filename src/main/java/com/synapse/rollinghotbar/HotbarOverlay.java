@@ -1,6 +1,6 @@
 package com.synapse.rollinghotbar;
 
-import com.synapse.rollinghotbar.hotbars.CycleHotbar;
+import com.synapse.rollinghotbar.hotbars.RadialHotbar;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
@@ -12,7 +12,7 @@ public class HotbarOverlay {
 
             if (gui.getMinecraft().gameMode.getPlayerMode() != GameType.SPECTATOR) {
 
-                CycleHotbar.drawHotbar(gui, poseStack, partialTick, width, height);
+                RadialHotbar.drawHotbar(gui, poseStack, partialTick, width, height);
 
             }
         }
