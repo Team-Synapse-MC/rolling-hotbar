@@ -7,14 +7,14 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 
-public class RadialHotbar {
-    private static boolean initialized = false;
+public class RadialHotbar extends AnimatedHotbar {
+    private boolean initialized = false;
 
-    private static float displayedSelection;
-    private static float targetSelection;
-    private static int lastSelection;
+    private float displayedSelection;
+    private float targetSelection;
+    private int lastSelection;
 
-    public static void drawHotbar(ForgeGui gui, GuiGraphics graphics, float partialTick, int width, int height) {
+    public void drawHotbar(ForgeGui gui, GuiGraphics graphics, float partialTick, int width, int height) {
         Minecraft mc = gui.getMinecraft();
 
         if (mc.player == null)
