@@ -45,7 +45,9 @@ public class RadialHotbar extends AnimatedHotbar {
         }
 
         // smooth animation
-        displayedSelection += (targetSelection - displayedSelection) * 0.22f;
+        float speed = 12.0f; // higher = snappier
+        float t = 1.0f - (float) Math.exp(-speed * mc.getDeltaFrameTime() / 20.0f);
+        displayedSelection += (targetSelection - displayedSelection) * t;
 
         // Prevent values from growing forever
         if (Math.abs(displayedSelection) > 1000) {

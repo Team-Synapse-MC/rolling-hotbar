@@ -51,7 +51,8 @@ public class RollingHotbar extends AnimatedHotbar {
             lastSelection = selected;
         }
 
-        displayedSelection += (targetSelection - displayedSelection) * 0.22f;
+        float speed = 1f;
+        displayedSelection += (targetSelection - displayedSelection) * speed * mc.getDeltaFrameTime();
 
         if (Math.abs(displayedSelection - targetSelection) < 0.001f)
             displayedSelection = targetSelection;
@@ -108,8 +109,6 @@ public class RollingHotbar extends AnimatedHotbar {
 
             while (offset < -4.5f)
                 offset += 9f;
-
-            float distance = Math.abs(offset);
 
             float scale = 1;
             float alpha = 1;

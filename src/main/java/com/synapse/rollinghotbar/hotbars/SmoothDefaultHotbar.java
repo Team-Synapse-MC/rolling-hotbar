@@ -41,8 +41,8 @@ public class SmoothDefaultHotbar extends AnimatedHotbar {
         }
 
         // smooth animation
-        float speed = 0.35f;
-        displayedSelection += (targetSelection - displayedSelection) * speed;
+        float speed = 1f;
+        displayedSelection += (targetSelection - displayedSelection) * speed * mc.getDeltaFrameTime();
 
         // snap when close
         if (Math.abs(displayedSelection - targetSelection) < 0.01f) {
