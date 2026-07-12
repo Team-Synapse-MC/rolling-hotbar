@@ -15,7 +15,7 @@ public class RollingHotbar extends AnimatedHotbar {
                     "textures/gui/widgets.png"
             );
 
-    public boolean renderHotbarBackground = false;
+    public boolean renderHotbarBackground = true;
 
     private boolean initialized = false;
 
@@ -65,7 +65,7 @@ public class RollingHotbar extends AnimatedHotbar {
 
         int centerX = width / 2;
         int centerY = height - 11;
-        int spacing = 25;
+        int spacing = 20;
 
         // draw hotbar background
         if (renderHotbarBackground) {
@@ -148,7 +148,7 @@ public class RollingHotbar extends AnimatedHotbar {
         }
 
         graphics.pose().pushPose();
-        graphics.pose().translate(0, 0, 150);
+        graphics.pose().translate(0, 0, 400);
 
         graphics.blit(
                 WIDGETS,
