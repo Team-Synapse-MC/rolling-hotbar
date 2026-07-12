@@ -1,5 +1,6 @@
-package com.synapse.betterhotbars.hotbars;
+package com.synapse.betterhotbars.hotbars.hotbar_types;
 
+import com.synapse.betterhotbars.hotbars.AnimatedHotbar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;

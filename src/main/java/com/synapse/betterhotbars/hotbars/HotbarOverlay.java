@@ -1,5 +1,6 @@
-package com.synapse.betterhotbars;
+package com.synapse.betterhotbars.hotbars;
 
+import com.synapse.betterhotbars.BetterHotbarsConfig;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 

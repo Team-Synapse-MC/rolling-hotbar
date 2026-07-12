@@ -1,5 +1,10 @@
 package com.synapse.betterhotbars.hotbars;
 
+import com.synapse.betterhotbars.hotbars.hotbar_types.RadialHotbar;
+import com.synapse.betterhotbars.hotbars.hotbar_types.RollingHotbar;
+import com.synapse.betterhotbars.hotbars.hotbar_types.RollingHotbar2;
+import com.synapse.betterhotbars.hotbars.hotbar_types.SmoothDefaultHotbar;
+
 public enum AnimatedHotbarTypes {
 
     RADIAL_HOTBAR(new RadialHotbar()),

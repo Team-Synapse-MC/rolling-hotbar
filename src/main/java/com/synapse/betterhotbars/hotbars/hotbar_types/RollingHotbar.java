@@ -1,13 +1,23 @@
-package com.synapse.betterhotbars.hotbars;
+package com.synapse.betterhotbars.hotbars.hotbar_types;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.synapse.betterhotbars.hotbars.AnimatedHotbar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 
-public class RadialHotbar extends AnimatedHotbar {
+public class RollingHotbar extends AnimatedHotbar {
+    private static final ResourceLocation WIDGETS =
+            ResourceLocation.fromNamespaceAndPath(
+                    "minecraft",
+                    "textures/gui/widgets.png"
+            );
+
+    public boolean renderHotbarBackground = true;
+
     private boolean initialized = false;
 
     private float displayedSelection;
@@ -30,11 +40,9 @@ public class RadialHotbar extends AnimatedHotbar {
             lastSelection = selected;
         }
 
-        // detect scroll direction
         if (selected != lastSelection) {
             int diff = selected - lastSelection;
 
-            // choose the shortest path around the wheel
             if (diff > 4)
                 diff -= 9;
             else if (diff < -4)
@@ -44,12 +52,12 @@ public class RadialHotbar extends AnimatedHotbar {
             lastSelection = selected;
         }
 
-        // smooth animation
-        float speed = 12.0f; // higher = snappier
-        float t = 1.0f - (float) Math.exp(-speed * mc.getDeltaFrameTime() / 20.0f);
-        displayedSelection += (targetSelection - displayedSelection) * t;
+        float speed = 1f;
+        displayedSelection += (targetSelection - displayedSelection) * speed * mc.getDeltaFrameTime();
 
-        // Prevent values from growing forever
+        if (Math.abs(displayedSelection - targetSelection) < 0.001f)
+            displayedSelection = targetSelection;
+
         if (Math.abs(displayedSelection) > 1000) {
             float wraps = (float) Math.floor(displayedSelection / 9f);
             displayedSelection -= wraps * 9f;
@@ -57,25 +65,41 @@ public class RadialHotbar extends AnimatedHotbar {
         }
 
         int centerX = width / 2;
-        int centerY = height - 32;
-        int spacing = 30;
+        int centerY = height - 11;
+        int spacing = 20;
 
-        // render offhand item
-        ItemStack offhand = mc.player.getOffhandItem();
-
-        if (!offhand.isEmpty()) {
-            graphics.pose().pushPose();
-            // normal selected slot position
-            graphics.pose().translate(centerX, centerY - 20, 0);
-            // smaller than main items
-            graphics.pose().scale(0.75f, 0.75f, 1);
-            RenderSystem.enableBlend();
-            graphics.setColor(1f, 1f, 1f, 0.8f);
-            graphics.renderItem(offhand, -8, -8);
-            graphics.renderItemDecorations(mc.font, offhand, -8, -8);
-            graphics.setColor(1f, 1f, 1f, 1f);
-            graphics.pose().popPose();
+        // draw hotbar background
+        if (renderHotbarBackground) {
+            graphics.blit(
+                    WIDGETS,
+                    width / 2 - 91,
+                    height - 22,
+                    0,
+                    0,
+                    182,
+                    22,
+                    256,
+                    256
+            );
         }
+
+        // render offhand behind the selected item
+//        ItemStack offhand = mc.player.getOffhandItem();
+//
+//        if (!offhand.isEmpty()) {
+//            graphics.pose().pushPose();
+//            graphics.pose().translate(centerX, centerY - 3, 0);
+//            graphics.pose().scale(0.75f, 0.75f, 1);
+//
+//            RenderSystem.enableBlend();
+//            graphics.setColor(1f, 1f, 1f, 0.65f);
+//
+//            graphics.renderItem(offhand, -8, -8);
+//            graphics.renderItemDecorations(mc.font, offhand, -8, -8);
+//
+//            graphics.setColor(1f, 1f, 1f, 1f);
+//            graphics.pose().popPose();
+//        }
 
         for (int slot = 8; slot >= 0; slot--) {
 
@@ -87,23 +111,13 @@ public class RadialHotbar extends AnimatedHotbar {
             while (offset < -4.5f)
                 offset += 9f;
 
-            float distance = Math.abs(offset);
-
-            float scale = Math.max(0.55f, 1.0f - distance * 0.12f);
-
-            // make the selected item a little bigger
-            if (slot == selected) {
-                scale = 1.3f;
-            }
-
-            float yOffset = distance * distance * 1.55f;
-            float alpha = Math.max(0.35f, 1.0f - distance * 0.18f);
+            float scale = 1;
+            float alpha = 1;
 
             float x = centerX + offset * spacing;
-            float y = centerY + yOffset;
+            float y = centerY;
 
             graphics.pose().pushPose();
-
             graphics.pose().translate(x, y, 200);
             graphics.pose().scale(scale, scale, 1);
 
@@ -123,33 +137,32 @@ public class RadialHotbar extends AnimatedHotbar {
 
         if (!selectedStack.isEmpty()) {
             String text = selectedStack.getHoverName().getString();
-
             int textWidth = mc.font.width(text);
 
             graphics.drawString(
                     mc.font,
                     text,
                     centerX - textWidth / 2,
-                    centerY + 16,
+                    centerY + 18,
                     0xFFFFFF
             );
         }
 
-        if (!gui.getMinecraft().options.hideGui && gui.shouldDrawSurvivalElements()) {
-            drawBars(gui, graphics, partialTick, width, height);
-        }
-    }
-
-    private void drawBars(ForgeGui gui, GuiGraphics graphics, float partialTick, int width, int height) {
         graphics.pose().pushPose();
-        graphics.pose().translate(0, -height + 55, 0);
-        gui.renderHealth(width, height, graphics);
-        gui.renderFood(width, height, graphics);
-        graphics.pose().popPose();
+        graphics.pose().translate(0, 0, 400);
 
-        graphics.pose().pushPose();
-        graphics.pose().translate(0, -height + 37, 0);
-        gui.renderExperienceBar(graphics, width / 2 - 91);
+        graphics.blit(
+                WIDGETS,
+                centerX - 12,
+                centerY - 12,
+                0,
+                22,
+                24,
+                24,
+                256,
+                256
+        );
+
         graphics.pose().popPose();
     }
 }

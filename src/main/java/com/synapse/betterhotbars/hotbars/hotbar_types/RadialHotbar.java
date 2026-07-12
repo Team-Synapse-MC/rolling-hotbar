@@ -1,13 +1,14 @@
-package com.synapse.betterhotbars.hotbars;
+package com.synapse.betterhotbars.hotbars.hotbar_types;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.synapse.betterhotbars.hotbars.AnimatedHotbar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 
-public class RollingHotbar2 extends AnimatedHotbar {
+public class RadialHotbar extends AnimatedHotbar {
     private boolean initialized = false;
 
     private float displayedSelection;
@@ -57,7 +58,7 @@ public class RollingHotbar2 extends AnimatedHotbar {
         }
 
         int centerX = width / 2;
-        int centerY = height - 13;
+        int centerY = height - 32;
         int spacing = 30;
 
         // render offhand item
@@ -96,8 +97,11 @@ public class RollingHotbar2 extends AnimatedHotbar {
                 scale = 1.3f;
             }
 
+            float yOffset = distance * distance * 1.55f;
+            float alpha = Math.max(0.35f, 1.0f - distance * 0.18f);
+
             float x = centerX + offset * spacing;
-            float y = centerY;
+            float y = centerY + yOffset;
 
             graphics.pose().pushPose();
 
@@ -105,7 +109,7 @@ public class RollingHotbar2 extends AnimatedHotbar {
             graphics.pose().scale(scale, scale, 1);
 
             RenderSystem.enableBlend();
-            graphics.setColor(1f, 1f, 1f, 1);
+            graphics.setColor(1f, 1f, 1f, alpha);
 
             ItemStack stack = inventory.getItem(slot);
 
