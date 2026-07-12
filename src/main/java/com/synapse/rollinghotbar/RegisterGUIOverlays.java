@@ -12,7 +12,7 @@ public class RegisterGUIOverlays {
     public static class ClientModBusEvents {
         @SubscribeEvent
         public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
-            event.registerAboveAll("rolling_hotbar", HotbarOverlay.ROLLING_HOTBAR);
+            event.registerBelowAll("rolling_hotbar", HotbarOverlay.ROLLING_HOTBAR);
         }
     }
 }

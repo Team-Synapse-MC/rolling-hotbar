@@ -134,5 +134,22 @@ public class RadialHotbar extends AnimatedHotbar {
                     0xFFFFFF
             );
         }
+
+        if (!gui.getMinecraft().options.hideGui && gui.shouldDrawSurvivalElements()) {
+            drawBars(gui, graphics, partialTick, width, height);
+        }
+    }
+
+    private void drawBars(ForgeGui gui, GuiGraphics graphics, float partialTick, int width, int height) {
+        graphics.pose().pushPose();
+        graphics.pose().translate(0, -height + 55, 0);
+        gui.renderHealth(width, height, graphics);
+        gui.renderFood(width, height, graphics);
+        graphics.pose().popPose();
+
+        graphics.pose().pushPose();
+        graphics.pose().translate(0, -height + 37, 0);
+        gui.renderExperienceBar(graphics, width / 2 - 91);
+        graphics.pose().popPose();
     }
 }
