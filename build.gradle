@@ -217,6 +217,6 @@ tasks.withType(JavaCompile).configureEach {
 
 mixin {
     // MixinGradle Settings
-    add sourceSets.main, 'mixins.rollinghotbar.refmap.json'
-    config 'mixins.rollinghotbar.json'
+    add sourceSets.main, 'mixins.betterhotbars.refmap.json'
+    config 'mixins.betterhotbars.json'
 }

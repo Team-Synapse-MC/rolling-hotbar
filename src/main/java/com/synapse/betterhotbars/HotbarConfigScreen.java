@@ -1,6 +1,6 @@
-package com.synapse.rollinghotbar;
+package com.synapse.betterhotbars;
 
-import com.synapse.rollinghotbar.hotbars.AnimatedHotbarTypes;
+import com.synapse.betterhotbars.hotbars.AnimatedHotbarTypes;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
@@ -28,10 +28,10 @@ public class HotbarConfigScreen {
                 entryBuilder.startEnumSelector(
                                 Component.literal("Hotbar Style"),
                                 AnimatedHotbarTypes.class,
-                                RollingHotbarConfig.HOTBAR_TYPE.get()
+                                BetterHotbarsConfig.HOTBAR_TYPE.get()
                         )
                         .setDefaultValue(AnimatedHotbarTypes.ROLLING_HOTBAR)
-                        .setSaveConsumer(RollingHotbarConfig.HOTBAR_TYPE::set)
+                        .setSaveConsumer(BetterHotbarsConfig.HOTBAR_TYPE::set)
                         .build()
         );
 

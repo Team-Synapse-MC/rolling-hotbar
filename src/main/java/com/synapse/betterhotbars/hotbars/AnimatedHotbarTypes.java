@@ -1,4 +1,4 @@
-package com.synapse.rollinghotbar.hotbars;
+package com.synapse.betterhotbars.hotbars;
 
 public enum AnimatedHotbarTypes {
 

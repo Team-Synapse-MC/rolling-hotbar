@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "com.synapse.rollinghotbar.mixins",
+  "package": "com.synapse.betterhotbars.mixins",
   "compatibilityLevel": "JAVA_17",
   "refmap": "inhabitants.refmap.json",
   "mixins": [

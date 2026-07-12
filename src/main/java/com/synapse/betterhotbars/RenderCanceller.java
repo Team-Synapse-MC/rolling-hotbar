@@ -1,13 +1,13 @@
-package com.synapse.rollinghotbar;
+package com.synapse.betterhotbars;
 
-import com.synapse.rollinghotbar.hotbars.AnimatedHotbarTypes;
+import com.synapse.betterhotbars.hotbars.AnimatedHotbarTypes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = RollingHotbar.MODID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = BetterHotbars.MODID, value = Dist.CLIENT)
 public class RenderCanceller {
 
     @SubscribeEvent
@@ -16,7 +16,7 @@ public class RenderCanceller {
             event.setCanceled(true);
         }
 
-        if (RollingHotbarConfig.HOTBAR_TYPE.get() == AnimatedHotbarTypes.RADIAL_HOTBAR) {
+        if (BetterHotbarsConfig.HOTBAR_TYPE.get() == AnimatedHotbarTypes.RADIAL_HOTBAR) {
             if (event.getOverlay().id().equals(VanillaGuiOverlay.ITEM_NAME.id())
                     || event.getOverlay().id().equals(VanillaGuiOverlay.EXPERIENCE_BAR.id())
                     || event.getOverlay().id().equals(VanillaGuiOverlay.PLAYER_HEALTH.id())

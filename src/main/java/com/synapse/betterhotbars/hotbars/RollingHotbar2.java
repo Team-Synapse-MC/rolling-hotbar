@@ -1,4 +1,4 @@
-package com.synapse.rollinghotbar.hotbars;
+package com.synapse.betterhotbars.hotbars;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;

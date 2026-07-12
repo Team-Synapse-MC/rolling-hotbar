@@ -1,4 +1,4 @@
-package com.synapse.rollinghotbar.hotbars;
+package com.synapse.betterhotbars.hotbars;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

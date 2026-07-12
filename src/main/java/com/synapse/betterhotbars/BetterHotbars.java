@@ -1,4 +1,4 @@
-package com.synapse.rollinghotbar;
+package com.synapse.betterhotbars;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -15,18 +15,18 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
-@Mod(RollingHotbar.MODID)
-public class RollingHotbar
+@Mod(BetterHotbars.MODID)
+public class BetterHotbars
 {
-    public static final String MODID = "rollinghotbar";
+    public static final String MODID = "betterhotbars";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public RollingHotbar(FMLJavaModLoadingContext context)
+    public BetterHotbars(FMLJavaModLoadingContext context)
     {
         IEventBus modEventBus = context.getModEventBus();
         context.registerConfig(
                 ModConfig.Type.CLIENT,
-                RollingHotbarConfig.SPEC
+                BetterHotbarsConfig.SPEC
         );
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);

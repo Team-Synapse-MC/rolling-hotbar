@@ -1,4 +1,4 @@
-package com.synapse.rollinghotbar;
+package com.synapse.betterhotbars;
 
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
@@ -12,7 +12,7 @@ public class HotbarOverlay {
 
             if (gui.getMinecraft().gameMode.getPlayerMode() != GameType.SPECTATOR) {
 
-                RollingHotbarConfig.HOTBAR_TYPE.get().getHotbar().drawHotbar(gui, poseStack, partialTick, width, height);
+                BetterHotbarsConfig.HOTBAR_TYPE.get().getHotbar().drawHotbar(gui, poseStack, partialTick, width, height);
 
             }
         }

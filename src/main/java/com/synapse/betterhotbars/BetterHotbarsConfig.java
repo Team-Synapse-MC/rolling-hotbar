@@ -1,9 +1,9 @@
-package com.synapse.rollinghotbar;
+package com.synapse.betterhotbars;
 
-import com.synapse.rollinghotbar.hotbars.AnimatedHotbarTypes;
+import com.synapse.betterhotbars.hotbars.AnimatedHotbarTypes;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class RollingHotbarConfig {
+public class BetterHotbarsConfig {
 
     public static final ForgeConfigSpec SPEC;
 
