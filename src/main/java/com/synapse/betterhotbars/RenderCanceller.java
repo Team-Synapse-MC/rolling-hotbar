@@ -1,6 +1,7 @@
 package com.synapse.betterhotbars;
 
 import com.synapse.betterhotbars.hotbars.AnimatedHotbarTypes;
+import com.synapse.betterhotbars.util.Util;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
@@ -17,10 +18,7 @@ public class RenderCanceller {
         }
 
         if (BetterHotbarsConfig.HOTBAR_TYPE.get() == AnimatedHotbarTypes.RADIAL_HOTBAR) {
-            if (event.getOverlay().id().equals(VanillaGuiOverlay.ITEM_NAME.id())
-                    || event.getOverlay().id().equals(VanillaGuiOverlay.EXPERIENCE_BAR.id())
-                    || event.getOverlay().id().equals(VanillaGuiOverlay.PLAYER_HEALTH.id())
-                    || event.getOverlay().id().equals(VanillaGuiOverlay.FOOD_LEVEL.id())) {
+            if (event.getOverlay().id().equals(VanillaGuiOverlay.ITEM_NAME.id()) || Util.hudBars.contains(event.getOverlay().id())) {
                 event.setCanceled(true);
             }
         }

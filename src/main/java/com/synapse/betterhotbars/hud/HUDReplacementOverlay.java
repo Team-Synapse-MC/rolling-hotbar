@@ -16,15 +16,17 @@ public class HUDReplacementOverlay {
                 if (!gui.getMinecraft().options.hideGui && gui.shouldDrawSurvivalElements()) {
 
                     if (BetterHotbarsConfig.HOTBAR_TYPE.get() == AnimatedHotbarTypes.RADIAL_HOTBAR) {
-                        drawBars(gui, poseStack, partialTick, width, height);
+                        drawRadialBars(gui, poseStack, partialTick, width, height);
                     }
                 }
-
             }
         }
     });
 
-    private static void drawBars(ForgeGui gui, GuiGraphics graphics, float partialTick, int width, int height) {
+    /**
+     * draws bars at the top of the screen (when player's radial hotbar is taking up bottom of the screen)
+     */
+    private static void drawRadialBars(ForgeGui gui, GuiGraphics graphics, float partialTick, int width, int height) {
         graphics.pose().pushPose();
         graphics.pose().translate(0, -height + 55, 0);
         gui.renderHealth(width, height, graphics);

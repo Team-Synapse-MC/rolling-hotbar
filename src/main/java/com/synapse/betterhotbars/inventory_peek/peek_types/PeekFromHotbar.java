@@ -1,15 +1,25 @@
 package com.synapse.betterhotbars.inventory_peek.peek_types;
 
+import com.synapse.betterhotbars.BetterHotbars;
+import com.synapse.betterhotbars.BetterHotbarsConfig;
 import com.synapse.betterhotbars.OverlayOption;
+import com.synapse.betterhotbars.inventory_peek.InventoryPeekTypes;
 import com.synapse.betterhotbars.keybinding.KeyBinding;
+import com.synapse.betterhotbars.util.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
+@Mod.EventBusSubscriber(modid = BetterHotbars.MODID, value = Dist.CLIENT)
 public class PeekFromHotbar extends OverlayOption {
-    private static float currentY = Float.NaN;
+    private static float hudOffset = 0f;
+    private static float peekProgress = 0f;
 
     private static final ResourceLocation WIDGETS =
             ResourceLocation.withDefaultNamespace("textures/gui/widgets.png");
@@ -29,15 +39,13 @@ public class PeekFromHotbar extends OverlayOption {
         int hotbarLeft = width / 2 - 91;
         int startX = hotbarLeft + 3;
 
+        float targetProgress = KeyBinding.PEEK_INVENTORY_KEY.isDown() ? 1f : 0f;
 
-        if (Float.isNaN(currentY))
-            currentY = hiddenY;
+        peekProgress = Util.smoothSnap(peekProgress, targetProgress, 15.0f, mc.getDeltaFrameTime(), 0.001f);
 
-        float targetY = KeyBinding.PEEK_INVENTORY_KEY.isDown() ? shownY : hiddenY;
+        float currentY = hiddenY + (shownY - hiddenY) * peekProgress;
 
-        float speed = 15.0f;
-        float t = 1.0f - (float) Math.exp(-speed * mc.getDeltaFrameTime() / 20.0f);
-        currentY += (targetY - currentY) * t;
+        hudOffset = -60f * peekProgress;
 
         int yBase = Math.round(currentY);
 
@@ -62,10 +70,35 @@ public class PeekFromHotbar extends OverlayOption {
                 int slot = 9 + row * 9 + col;
 
                 int x = startX + col * 20;
-                int y = yBase + row * 20 + 3;
+                int y = yBase + row * 20 + 2;
 
                 graphics.renderItem(inventory.getItem(slot), x, y);
                 graphics.renderItemDecorations(mc.font, inventory.getItem(slot), x, y);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onRenderGuiPre(RenderGuiOverlayEvent.Pre event) {
+        ResourceLocation id = event.getOverlay().id();
+
+        if (BetterHotbarsConfig.PEEKER_TYPE.get() == InventoryPeekTypes.PEEK_FROM_HOTBAR) {
+
+            if (Util.hudBars.contains(id)) {
+                event.getGuiGraphics().pose().pushPose();
+                event.getGuiGraphics().pose().translate(0, PeekFromHotbar.hudOffset, 0);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onRenderOverlayPost(RenderGuiOverlayEvent.Post event) {
+        ResourceLocation id = event.getOverlay().id();
+
+        if (BetterHotbarsConfig.PEEKER_TYPE.get() == InventoryPeekTypes.PEEK_FROM_HOTBAR) {
+
+            if (Util.hudBars.contains(id)) {
+                event.getGuiGraphics().pose().popPose();
             }
         }
     }
