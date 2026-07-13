@@ -2,6 +2,7 @@ package com.synapse.betterhotbars.hotbars.hotbar_types;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.synapse.betterhotbars.hotbars.AnimatedHotbar;
+import com.synapse.betterhotbars.hotbars.HotbarUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -83,23 +84,7 @@ public class RollingHotbar extends AnimatedHotbar {
             );
         }
 
-        // render offhand behind the selected item
-//        ItemStack offhand = mc.player.getOffhandItem();
-//
-//        if (!offhand.isEmpty()) {
-//            graphics.pose().pushPose();
-//            graphics.pose().translate(centerX, centerY - 3, 0);
-//            graphics.pose().scale(0.75f, 0.75f, 1);
-//
-//            RenderSystem.enableBlend();
-//            graphics.setColor(1f, 1f, 1f, 0.65f);
-//
-//            graphics.renderItem(offhand, -8, -8);
-//            graphics.renderItemDecorations(mc.font, offhand, -8, -8);
-//
-//            graphics.setColor(1f, 1f, 1f, 1f);
-//            graphics.pose().popPose();
-//        }
+        HotbarUtil.drawOffhandNormal(gui, graphics, partialTick, width, height);
 
         for (int slot = 8; slot >= 0; slot--) {
 

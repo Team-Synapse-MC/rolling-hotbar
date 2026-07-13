@@ -1,10 +1,10 @@
 package com.synapse.betterhotbars.hotbars.hotbar_types;
 
 import com.synapse.betterhotbars.hotbars.AnimatedHotbar;
+import com.synapse.betterhotbars.hotbars.HotbarUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
@@ -66,37 +66,7 @@ public class SmoothDefaultHotbar extends AnimatedHotbar {
                 256
         );
 
-        // draw offhand slot background
-        ItemStack offhand = mc.player.getOffhandItem();
-        HumanoidArm offhandSide = mc.player.getMainArm().getOpposite(); // draw slot on left for right-handers and vice versa
-
-        if (!offhand.isEmpty()) {
-            if (offhandSide == HumanoidArm.LEFT) {
-                graphics.blit(
-                        WIDGETS,
-                        left - 29,
-                        y - 1,
-                        24,
-                        22,
-                        29,
-                        24,
-                        256,
-                        256
-                );
-            } else {
-                graphics.blit(
-                        WIDGETS,
-                        left + 182,
-                        y - 1,
-                        53,
-                        22,
-                        29,
-                        24,
-                        256,
-                        256
-                );
-            }
-        }
+        HotbarUtil.drawOffhandNormal(gui, graphics, partialTick, width, height);
 
         // draw items in hotbar
         for (int slot = 0; slot < 9; slot++) {
@@ -107,22 +77,6 @@ public class SmoothDefaultHotbar extends AnimatedHotbar {
 
             graphics.renderItem(stack, x, y + 3);
             graphics.renderItemDecorations(mc.font, stack, x, y + 3);
-        }
-
-        // draw offhand item
-        if (!offhand.isEmpty()) {
-            int offhandY = y + 3;
-
-            int x;
-            if (offhandSide == HumanoidArm.LEFT) {
-                x = left - 26;
-
-            } else {
-                x = left + 192;
-
-            }
-            graphics.renderItem(offhand, x, offhandY);
-            graphics.renderItemDecorations(mc.font, offhand, x, offhandY);
         }
 
         // draw animated selector
