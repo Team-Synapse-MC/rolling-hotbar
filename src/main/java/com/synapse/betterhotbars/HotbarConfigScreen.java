@@ -31,7 +31,7 @@ public class HotbarConfigScreen {
                                 AnimatedHotbarTypes.class,
                                 BetterHotbarsConfig.HOTBAR_TYPE.get()
                         )
-                        .setDefaultValue(AnimatedHotbarTypes.ROLLING_HOTBAR)
+                        .setDefaultValue(AnimatedHotbarTypes.SMOOTH_DEFAULT_HOTBAR)
                         .setSaveConsumer(BetterHotbarsConfig.HOTBAR_TYPE::set)
                         .build()
         );

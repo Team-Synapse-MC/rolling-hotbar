@@ -20,7 +20,7 @@ public class BetterHotbarsConfig {
                 .comment("The hotbar style to use")
                 .defineEnum(
                         "hotbarStyle",
-                        AnimatedHotbarTypes.ROLLING_HOTBAR
+                        AnimatedHotbarTypes.SMOOTH_DEFAULT_HOTBAR
                 );
 
         PEEKER_TYPE = builder
