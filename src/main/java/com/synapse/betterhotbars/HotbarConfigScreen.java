@@ -16,7 +16,17 @@ public class HotbarConfigScreen {
                 .setParentScreen(parent)
                 .setTitle(Component.literal("Rolling Hotbar"))
                 .setSavingRunnable(() -> {
-                    System.out.println("Config saved!");
+                    AnimatedHotbarTypes hotbar = BetterHotbarsConfig.HOTBAR_TYPE.get();
+                    InventoryPeekTypes peeker = BetterHotbarsConfig.PEEKER_TYPE.get();
+
+                    // invalid combination: can't have peek from hotbar with radial hotbar
+                    if (hotbar == AnimatedHotbarTypes.RADIAL_HOTBAR &&
+                            peeker == InventoryPeekTypes.PEEK_FROM_HOTBAR) {
+
+                        BetterHotbarsConfig.PEEKER_TYPE.set(InventoryPeekTypes.PEEK_FROM_TOP);
+                    }
+
+                    BetterHotbarsConfig.SPEC.save();
                 });
 
         ConfigCategory general = builder.getOrCreateCategory(
