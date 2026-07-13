@@ -13,7 +13,7 @@ public class HotbarOverlay {
 
             if (gui.getMinecraft().gameMode.getPlayerMode() != GameType.SPECTATOR) {
 
-                BetterHotbarsConfig.HOTBAR_TYPE.get().getHotbar().drawHotbar(gui, poseStack, partialTick, width, height);
+                BetterHotbarsConfig.HOTBAR_TYPE.get().getHotbar().render(gui, poseStack, partialTick, width, height);
 
             }
         }

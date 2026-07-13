@@ -1,5 +1,6 @@
 package com.synapse.betterhotbars.hotbars;
 
+import com.synapse.betterhotbars.OverlayOption;
 import com.synapse.betterhotbars.hotbars.hotbar_types.RadialHotbar;
 import com.synapse.betterhotbars.hotbars.hotbar_types.RollingHotbar;
 import com.synapse.betterhotbars.hotbars.hotbar_types.RollingHotbar2;
@@ -12,12 +13,12 @@ public enum AnimatedHotbarTypes {
     ROLLING_HOTBAR_2(new RollingHotbar2()),
     SMOOTH_DEFAULT_HOTBAR(new SmoothDefaultHotbar());
 
-    private final AnimatedHotbar hotbar;
+    private final OverlayOption hotbar;
 
-    AnimatedHotbarTypes(AnimatedHotbar hotbar) {
+    AnimatedHotbarTypes(OverlayOption hotbar) {
         this.hotbar = hotbar;
     }
-    public AnimatedHotbar getHotbar() {
+    public OverlayOption getHotbar() {
         return this.hotbar;
     }
 }

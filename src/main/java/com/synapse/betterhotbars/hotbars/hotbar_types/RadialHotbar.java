@@ -1,21 +1,21 @@
 package com.synapse.betterhotbars.hotbars.hotbar_types;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.synapse.betterhotbars.hotbars.AnimatedHotbar;
+import com.synapse.betterhotbars.OverlayOption;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 
-public class RadialHotbar extends AnimatedHotbar {
+public class RadialHotbar extends OverlayOption {
     private boolean initialized = false;
 
     private float displayedSelection;
     private float targetSelection;
     private int lastSelection;
 
-    public void drawHotbar(ForgeGui gui, GuiGraphics graphics, float partialTick, int width, int height) {
+    public void render(ForgeGui gui, GuiGraphics graphics, float partialTick, int width, int height) {
         Minecraft mc = gui.getMinecraft();
 
         if (mc.player == null)

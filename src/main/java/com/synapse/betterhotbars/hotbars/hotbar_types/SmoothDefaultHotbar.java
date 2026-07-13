@@ -1,6 +1,6 @@
 package com.synapse.betterhotbars.hotbars.hotbar_types;
 
-import com.synapse.betterhotbars.hotbars.AnimatedHotbar;
+import com.synapse.betterhotbars.OverlayOption;
 import com.synapse.betterhotbars.hotbars.HotbarUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 
-public class SmoothDefaultHotbar extends AnimatedHotbar {
+public class SmoothDefaultHotbar extends OverlayOption {
 
     private static final ResourceLocation WIDGETS =
             ResourceLocation.fromNamespaceAndPath("minecraft", "textures/gui/widgets.png");
@@ -19,7 +19,7 @@ public class SmoothDefaultHotbar extends AnimatedHotbar {
     private float targetSelection;
     private int lastSelection;
 
-    public void drawHotbar(ForgeGui gui, GuiGraphics graphics, float partialTick, int width, int height) {
+    public void render(ForgeGui gui, GuiGraphics graphics, float partialTick, int width, int height) {
 
         Minecraft mc = gui.getMinecraft();
 

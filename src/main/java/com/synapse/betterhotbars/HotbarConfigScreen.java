@@ -1,6 +1,7 @@
 package com.synapse.betterhotbars;
 
 import com.synapse.betterhotbars.hotbars.AnimatedHotbarTypes;
+import com.synapse.betterhotbars.inventory_peek.InventoryPeekTypes;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
@@ -32,6 +33,16 @@ public class HotbarConfigScreen {
                         )
                         .setDefaultValue(AnimatedHotbarTypes.ROLLING_HOTBAR)
                         .setSaveConsumer(BetterHotbarsConfig.HOTBAR_TYPE::set)
+                        .build()
+        );
+        general.addEntry(
+                entryBuilder.startEnumSelector(
+                                Component.literal("Inventory Peek Style"),
+                                InventoryPeekTypes.class,
+                                BetterHotbarsConfig.PEEKER_TYPE.get()
+                        )
+                        .setDefaultValue(InventoryPeekTypes.PEEK_FROM_HOTBAR)
+                        .setSaveConsumer(BetterHotbarsConfig.PEEKER_TYPE::set)
                         .build()
         );
 
